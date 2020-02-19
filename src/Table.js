@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
 
+/**
+ * I denne fil har vi flere components, dette aner jeg ikke om er best practice,
+ * but who cares ??
+ */
 class Table extends Component {
 	render() {
 		return (
 			<table>
+				{/* 
+				Sender PROPS med vores components. Notér at vi ikke behøver en construcor
+				for at tilgå props !!! 
+				*/}
 				<TableHeader headers={this.props.headerData} />
 				<TableBody updateTodo={this.props.updateTodo} todoData={this.props.todoData} removeTodo={this.props.removeTodo} />
 			</table>
@@ -11,8 +19,11 @@ class Table extends Component {
 	}
 }
 
+// En functional component, med de props vi har sendt som parameter
 const TableHeader = props => {
+	// Sætter rows til at returne de forskellige table headers
 	const rows = props.headers.map((title, index) => {
+		// Husk en key for at React kan identificere hver enkelt
 		return <th key={index}>{title}</th>
 	})
 	return (
