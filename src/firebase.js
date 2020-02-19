@@ -1,15 +1,14 @@
 import firebase from 'firebase'
-const firebaseApp = firebase.initializeApp({
-	apiKey: 'AIzaSyADbXRzsM3ik6rGok_wGi-8b3xh9ZcuWdw',
-	authDomain: 'angular-test-4eb98.firebaseapp.com',
-	databaseURL: 'https://angular-test-4eb98.firebaseio.com',
-	projectId: 'angular-test-4eb98',
-	storageBucket: 'angular-test-4eb98.appspot.com',
-	messagingSenderId: '197303368326',
-	appId: '1:197303368326:web:3064d982a22e7c430baf07',
-	measurementId: 'G-XF0HGMC763'
-})
-
-const db = firebaseApp.firestore()
-
-export default db
+var firebaseConfig = {
+	apiKey: 'AIzaSyBkvdT8L4y1L3kTuWxh4bXBvewO3BOL2tk',
+	authDomain: 'todo-react-f11af.firebaseapp.com',
+	databaseURL: 'https://todo-react-f11af.firebaseio.com',
+	projectId: 'todo-react-f11af',
+	storageBucket: 'todo-react-f11af.appspot.com',
+	messagingSenderId: '858014112741',
+	appId: '1:858014112741:web:00534573b465897d4b6d0c'
+}
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig)
+const fire = firebase.firestore()
+export default fire

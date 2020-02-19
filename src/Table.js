@@ -1,12 +1,12 @@
 import React from 'react'
 
 const Table = props => {
-	const { peopleData, removePerson, headerData } = props
+	const { todoData, removeTodo, headerData } = props
 
 	return (
 		<table>
 			<TableHeader headers={headerData} />
-			<TableBody peopleData={peopleData} removePerson={removePerson} />
+			<TableBody todoData={todoData} removeTodo={removeTodo} />
 		</table>
 	)
 }
@@ -23,14 +23,20 @@ const TableHeader = props => {
 }
 
 const TableBody = props => {
-	const rows = props.peopleData.map((row, index) => {
+	const rows = props.todoData.map((row, index) => {
 		return (
-			<tr key={index}>
+			<tr key={row.id}>
 				<td>
-					<button onClick={() => props.removePerson(index)}>Delete</button>
+					<button
+						onClick={() => {
+							props.removeTodo(row.id)
+						}}
+					>
+						Delete
+					</button>
 				</td>
 				<td>{row.name}</td>
-				<td>{row.job}</td>
+				<td>{row.time}</td>
 			</tr>
 		)
 	})

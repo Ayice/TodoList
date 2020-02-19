@@ -6,7 +6,7 @@ class Form extends Component {
 
 		this.initialState = {
 			name: '',
-			job: ''
+			time: ''
 		}
 
 		this.state = this.initialState
@@ -21,7 +21,7 @@ class Form extends Component {
 
 	submitForm = event => {
 		event.preventDefault()
-		if (this.state.job === '' || this.state.name === '') {
+		if (this.state.time === '' || this.state.name === '') {
 			return alert('You need to enter something')
 		} else {
 			this.props.handleSubmit(this.state)
@@ -30,7 +30,7 @@ class Form extends Component {
 	}
 
 	render() {
-		const { name, job } = this.state
+		const { name, time } = this.state
 		return (
 			<form onSubmit={this.submitForm}>
 				<fieldset>
@@ -39,8 +39,8 @@ class Form extends Component {
 					<label>Name</label>
 					<input type='text' name='name' id='name' value={name} placeholder='Enter name here' onChange={this.handleChange} />
 
-					<label>Job</label>
-					<input type='text' name='job' id='job' value={job} placeholder='Enter job here' onChange={this.handleChange} />
+					<label>time</label>
+					<input type='text' name='time' id='time' value={time} placeholder='Enter time here' onChange={this.handleChange} />
 
 					<button type='submit' value='Submit'>
 						Submit
