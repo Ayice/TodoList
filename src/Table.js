@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-const Table = props => {
-	const { todoData, removeTodo, headerData } = props
-
-	return (
-		<table>
-			<TableHeader headers={headerData} />
-			<TableBody todoData={todoData} removeTodo={removeTodo} />
-		</table>
-	)
+class Table extends Component {
+	render() {
+		return (
+			<table>
+				<TableHeader headers={this.props.headerData} />
+				<TableBody updateTodo={this.props.updateTodo} todoData={this.props.todoData} removeTodo={this.props.removeTodo} />
+			</table>
+		)
+	}
 }
 
 const TableHeader = props => {
@@ -22,25 +22,67 @@ const TableHeader = props => {
 	)
 }
 
-const TableBody = props => {
-	const rows = props.todoData.map((row, index) => {
+class TableBody extends Component {
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			name: '',
+			time: ''
+		}
+	}
+
+	handleChange = event => {
+		const { name, value } = event.target
+		this.setState({
+			[name]: value
+		})
+	}
+
+	handleSubmit = (event, id) => {
+		this.props.updateTodo(this.state, event)
+	}
+
+	render() {
+		const { name, time } = this.state
 		return (
-			<tr key={row.id}>
-				<td>
-					<button
-						onClick={() => {
-							props.removeTodo(row.id)
-						}}
-					>
-						Delete
-					</button>
-				</td>
-				<td>{row.name}</td>
-				<td>{row.time}</td>
-			</tr>
+			<tbody>
+				{this.props.todoData.map((row, index) => {
+					return (
+						<tr key={row.id}>
+							<td>
+								<button
+									onClick={() => {
+										this.props.removeTodo(row.id)
+									}}
+								>
+									Delete
+								</button>
+
+								<button
+									type='submit'
+									onClick={() => {
+										this.handleSubmit(row.id)
+									}}
+								>
+									Update
+								</button>
+							</td>
+							<td>
+								<p> {row.name} </p>
+								<input type='text' name='name' placeholder='Enter name here' onChange={this.handleChange} />
+							</td>
+
+							<td>
+								<p>{row.time} </p>
+								<input type='text' name='time' placeholder='Enter time here' onChange={this.handleChange} />
+							</td>
+						</tr>
+					)
+				})}
+			</tbody>
 		)
-	})
-	return <tbody>{rows}</tbody>
+	}
 }
 
 export default Table
