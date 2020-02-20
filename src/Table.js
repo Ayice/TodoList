@@ -42,20 +42,29 @@ class TableBody extends Component {
 			time: ''
 		}
 	}
-
+	// Vores handleChange funktion bliver kørt hver gang vores input skifter.
+	// Den er meget lig med funktionen i Form.js.
 	handleChange = event => {
 		const { name, value } = event.target
 		this.setState({
 			[name]: value
 		})
 	}
+	// handleSubmit, bliver brugt når vi klikker knappen "Update".
+	// Vi sender vores state (som vi satte i funktionen ovenover) og så sender vi eventet med.
+	// I eventet har vi fx id'et som vi skal bruge senere
+	handleSubmit = event => {
+		/**
+		 * Her referer vi til vores props og giver den et parameter.
+		 * Vi emitter updateTodo så vores Table component kan gøre hvad den skal med updateTodo
+		 * I dette tilfælde er det at sende data tilbage i en prop.
+		 * Inde i App modtager vi dette og gør hvad vi skal. ( Ret smart :O )
+		 */
 
-	handleSubmit = (event, id) => {
 		this.props.updateTodo(this.state, event)
 	}
 
 	render() {
-		const { name, time } = this.state
 		return (
 			<tbody>
 				{this.props.todoData.map((row, index) => {
@@ -63,6 +72,8 @@ class TableBody extends Component {
 						<tr key={row.id}>
 							<td>
 								<button
+									// I React skal vi lave en funktion som så kører den funktion når vi laver inline events.
+									// Eller ihvertfald, sådan det er nu :O
 									onClick={() => {
 										this.props.removeTodo(row.id)
 									}}
